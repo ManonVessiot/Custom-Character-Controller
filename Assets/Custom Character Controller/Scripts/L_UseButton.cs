@@ -33,16 +33,18 @@ public class L_UseButton
             
             _actionSubscribed = _action;
 
+            
+
             switch (_action)
             {
                 case B_ControllerEvents.ActionButtonAlias.Pressed:
-                    B_ControllerEvents.keyWasPressed += Use;
+                    B_ControllerEvents.keyWasPressed[B_ControllerEvents._values.IndexOf(_key)] += Use;
                     break;
                 case B_ControllerEvents.ActionButtonAlias.Down:
-                    B_ControllerEvents.keyIsDown += Use;
+                    B_ControllerEvents.keyIsDown[B_ControllerEvents._values.IndexOf(_key)] += Use;
                     break;
                 case B_ControllerEvents.ActionButtonAlias.Released:
-                    B_ControllerEvents.keyWasReleased += Use;
+                    B_ControllerEvents.keyWasReleased[B_ControllerEvents._values.IndexOf(_key)] += Use;
                     break;
             }
 
@@ -61,13 +63,13 @@ public class L_UseButton
             switch (_actionSubscribed)
             {
                 case B_ControllerEvents.ActionButtonAlias.Pressed:
-                    B_ControllerEvents.keyWasPressed -= Use;
+                    B_ControllerEvents.keyWasPressed[B_ControllerEvents._values.IndexOf(_key)] -= Use;
                     break;
                 case B_ControllerEvents.ActionButtonAlias.Down:
-                    B_ControllerEvents.keyIsDown -= Use;
+                    B_ControllerEvents.keyIsDown[B_ControllerEvents._values.IndexOf(_key)] -= Use;
                     break;
                 case B_ControllerEvents.ActionButtonAlias.Released:
-                    B_ControllerEvents.keyWasReleased -= Use;
+                    B_ControllerEvents.keyWasReleased[B_ControllerEvents._values.IndexOf(_key)] -= Use;
                     break;
             }
             _actionSubscribed = B_ControllerEvents.ActionButtonAlias.Undefined;
@@ -75,9 +77,9 @@ public class L_UseButton
         }
     }
 
-    void Use(KeyCode key)
+    public void Use()
     {
-        if (key == _key && ButtonIsUsed != null)
+        if (ButtonIsUsed != null)
         {
             ButtonIsUsed();
         }
